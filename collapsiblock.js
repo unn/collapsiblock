@@ -21,18 +21,19 @@ Drupal.behaviors.collapsiblock = function (context) {
         return;
       }
 
-      titleElt.target = $(this).find(block_content);
+      titleElt.block_target = $(this).find(block_content);
       $(titleElt)
-        .addClass('collapsiblock')
-        .click(function () {
+       // .addClass('collapsiblock')
+        .click(function (event) {
+          event.preventDefault();
           var st = Drupal.Collapsiblock.getCookieData();
           if ($(this).is('.collapsiblockCollapsed')) {
             $(this).removeClass('collapsiblockCollapsed');
             if (slidetype == 1) {
-              $(this.target).slideDown(slidespeed);
+              $(this.block_target).slideDown(slidespeed);
             }
             else {
-              $(this.target).animate({height:'show', opacity:'show'}, slidespeed);
+              $(this.block_target).animate({height:'show', opacity:'show'}, slidespeed);
             }
 
             // Don't save cookie data if the block is always collapsed.
@@ -43,10 +44,10 @@ Drupal.behaviors.collapsiblock = function (context) {
           else {
             $(this).addClass('collapsiblockCollapsed');
             if (slidetype == 1) {
-              $(this.target).slideUp(slidespeed);
+              $(this.block_target).slideUp(slidespeed);
             }
             else {
-              $(this.target).animate({height:'hide', opacity:'hide'}, slidespeed);
+              $(this.block_target).animate({height:'hide', opacity:'hide'}, slidespeed);
             }
 
             // Don't save cookie data if the block is always collapsed.

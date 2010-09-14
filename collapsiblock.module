@@ -105,6 +105,26 @@ function collapsiblock_default_settings() {
   return $defaults;
 }
 
+function collapsiblock_preprocess_block(&$vars) {
+  $system_collapsed = variable_get('collapsiblock_settings', array());
+  $incoming_blocks  = 'block-'. $vars['block']->module .'-'. $vars['block']->delta;
+  
+  //  dsm(array_flip($system_collapsed), 'sys');
+  //  dsm($incoming_blocks, 'incoming');
+  // count(array_intersect(array_flip($system_collapsed), array($incoming_blocks)))
+  foreach ($system_collapsed as $block_name => $collapsed_state) {
+    if ($block_name == $incoming_blocks) {
+      array_unshift($vars['template_files'], 'collapsiblock-block');
+    }
+  }
+  //  dsm($collapsiblocks);
+  //  dsm($vars);
+}
+
+function collapsiblock_theme_registry_alter(&$theme_registry) {
+  array_unshift($theme_registry['block']['theme paths'], drupal_get_path('module', 'collapsiblock'));
+}
+
  /**
  * Implementation of hook_form_alter().
  */

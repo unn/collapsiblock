@@ -29,7 +29,7 @@ Drupal.behaviors.collapsiblock = function (context) {
           if ($(this).is('.collapsiblockCollapsed')) {
             $(this).removeClass('collapsiblockCollapsed');
             if (slidetype == 1) {
-              $(this.target).slideDown(slidespeed);
+              $(this.target).slideDown(slidespeed).attr('aria-hidden', false);
             }
             else {
               $(this.target).animate({height:'show', opacity:'show'}, slidespeed);
@@ -43,7 +43,7 @@ Drupal.behaviors.collapsiblock = function (context) {
           else {
             $(this).addClass('collapsiblockCollapsed');
             if (slidetype == 1) {
-              $(this.target).slideUp(slidespeed);
+              $(this.target).slideUp(slidespeed).attr('aria-hidden', true);
             }
             else {
               $(this.target).animate({height:'hide', opacity:'hide'}, slidespeed);

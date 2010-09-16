@@ -28,7 +28,7 @@
 ?>
 <div id="block-<?php print $block->module .'-'. $block->delta; ?>" class="block block-<?php print $block->module; ?>">
 <?php if ($block->subject): ?>
-  <h2 role="link"><?php print $block->subject; ?></h2>
+  <h2><a href="#" role="link"><?php print $block->subject; ?></a></h2>
 <?php endif; ?>
 
   <div class="content">
